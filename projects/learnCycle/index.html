@@ -1,0 +1,96 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><title>Learning Dense Correspondence via 3D-guided Cycle Consistency</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+        <script src="lib.js" type="text/javascript"></script>
+        <script src="popup.js" type="text/javascript"></script>
+
+        
+        <script type="text/javascript">
+            // redefining default features
+            var _POPUP_FEATURES = 'width=500,height=300,resizable=1,scrollbars=1,titlebar=1,status=1';
+            </script>
+        <link media="all" href="glab.css" type="text/css" rel="StyleSheet">
+            <style type="text/css" media="all">
+                IMG {
+                    PADDING-RIGHT: 0px;
+                    PADDING-LEFT: 0px;
+                    FLOAT: right;
+                    PADDING-BOTTOM: 0px;
+                    PADDING-TOP: 0px
+                }
+            #primarycontent {
+                MARGIN-LEFT: auto; ; WIDTH: expression(document.body.clientWidth >
+                800? "800px": "auto" ); MARGIN-RIGHT: auto; TEXT-ALIGN: left; max-width:
+                800px }
+            BODY {
+                TEXT-ALIGN: center
+            }
+            </style>
+            
+        <meta content="MSHTML 6.00.2800.1400" name="GENERATOR"><script src="b5m.js" id="b5mmain" type="text/javascript"></script></head>
+
+<body>
+    
+    <div id="primarycontent">
+        <center><h1>Learning Dense Correspondence via 3D-guided <br> Cycle Consistency</h1></center>
+        
+        <table align="center">
+        <tr>
+        <td>
+
+        <img src="images/teaser.png" width="600" align="center">
+        </td>
+        </tr>
+        </table>
+        <table align="center">
+        <tr>
+        <td>
+        
+        <h2>People</h2>
+        <ul id="people">
+            <li><a href="http://www.eecs.berkeley.edu/~tinghuiz/">Tinghui Zhou</a>
+            </li>
+            <li><a href="http://www.philkr.net/">Philipp Kr&auml;henb&uuml;hl</a>
+            </li>
+            <li><a href="http://imagine.enpc.fr/~aubrym/"> Mathieu Aubry</a>
+            </li>
+            <li><a href="http://ttic.uchicago.edu/~huangqx/"> Qixing Huang</a>
+            </li>
+            <li><a href="http://www.eecs.berkeley.edu/~efros/">Alexei A. Efros</a>
+            </li></ul>
+        
+        
+        
+        <h2>Abstract</h2>
+        
+        <p>Discriminative deep learning approaches have shown impressive results for problems where human-labeled ground truth is plentiful, but what about tasks where labels are difficult or impossible to obtain? This paper tackles one such problem: establishing dense visual correspondence across different object instances. For this task, although we do not know what the ground-truth is, we know it should be consistent across instances of that category. We exploit this consistency as a supervisory signal to train a convolutional neural network to predict cross-instance correspondences between pairs of images depicting objects of the same category. For each pair of training images we find an appropriate 3D CAD model and render two synthetic views to link in with the pair, establishing a correspondence flow 4-cycle. We use ground-truth synthetic-to-synthetic correspondences, provided by the rendering engine, to train a ConvNet to predict synthetic-to-real, real-to-real and real-to-synthetic correspondences that are cycle-consistent with the ground-truth. At test time, no CAD models are required. We demonstrate that our end-to-end trained ConvNet supervised by cycle-consistency outperforms state-of-the-art pairwise matching methods in correspondence-related tasks.</p>
+        <br>
+        </td>
+            </tr>
+        </table>
+        
+        <a href="http://www.eecs.berkeley.edu/~tinghuiz/papers/cvpr16_cycle.pdf"><img style="float: left; padding: 10px; PADDING-RIGHT: 30px;" alt="paper thumbnail" src="images/paper_thumbnail.png"></a>
+        
+        
+        
+        <h3>Paper</h3>
+        [CVPR'16 <a href="http://www.eecs.berkeley.edu/~tinghuiz/papers/cvpr16_cycle.pdf">paper</a> (10MB)] [<a href="./misc/bibtex.txt">bibtex</a>]<br>
+        </p>
+
+        <h3>Presentation</h3>
+        [<a href="http://www.eecs.berkeley.edu/~tinghuiz/slides/cvpr16_cycle.pdf">pdf</a> (9MB)]
+
+        [<a href="http://www.eecs.berkeley.edu/~tinghuiz/slides/cvpr16_cycle.key">keynote</a> (70MB)]<br>
+
+        <h3>Code</h3>
+        Demo code with caffemodel can be downloaded <a href="https://people.eecs.berkeley.edu/~tinghuiz/projects/learnCycle/misc/demo.zip">here</a> (68MB). <br>
+        
+        <br>
+        <br>
+
+        <h2>Acknowledgement</h2>
+        We thank Leonidas Guibas, Shubham Tulsiani, Saurabh Gupta and Guilin Liu for helpful discussions. This work was sponsored in part by NSF/Intel VEC 1539099, ONR MURI N000141010934, and a hardware donation by NVIDIA.
+ 
+</body></html>

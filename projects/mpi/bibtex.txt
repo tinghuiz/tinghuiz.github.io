@@ -1,0 +1,6 @@
+@inproceedings{zhou2018stereo,
+    Author = {Zhou, Tinghui and Tucker, Richard and Flynn, John and Fyffe, Graham and Snavely, Noah},
+    Title = {Stereo Magnification: Learning View Synthesis using Multiplane Images},
+    Booktitle = {SIGGRAPH},
+    Year = {2018}
+}

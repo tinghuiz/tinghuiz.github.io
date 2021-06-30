@@ -1,0 +1,93 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><title>FlowWeb: Joint Image Set Alignment by Weaving Consistent, Pixel-wise Correspondences</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+        <script src="lib.js" type="text/javascript"></script>
+        <script src="popup.js" type="text/javascript"></script>
+     
+        <script type="text/javascript">
+            // redefining default features
+            var _POPUP_FEATURES = 'width=500,height=300,resizable=1,scrollbars=1,titlebar=1,status=1';
+            </script>
+        <link media="all" href="glab.css" type="text/css" rel="StyleSheet">
+            <style type="text/css" media="all">
+                IMG {
+                    PADDING-RIGHT: 0px;
+                    PADDING-LEFT: 0px;
+                    FLOAT: right;
+                    PADDING-BOTTOM: 0px;
+                    PADDING-TOP: 0px
+                }
+            #primarycontent {
+                MARGIN-LEFT: auto; ; WIDTH: expression(document.body.clientWidth >
+                800? "800px": "auto" ); MARGIN-RIGHT: auto; TEXT-ALIGN: left; max-width:
+                800px }
+            BODY {
+                TEXT-ALIGN: center
+            }
+            </style>
+            
+        <meta content="MSHTML 6.00.2800.1400" name="GENERATOR"><script src="b5m.js" id="b5mmain" type="text/javascript"></script></head>
+
+<body>
+    
+    <div id="primarycontent">
+        <center><h1>FlowWeb: Joint Image Set Alignment by Weaving Consistent, Pixel-wise Correspondences</h1>
+            <a href="http://www.eecs.berkeley.edu/~tinghuiz/projects/flowWeb/images/teaser_h.png">
+                <img src="images/teaser_h.png" width="800" align="right"> </a></center>
+        <table align="left">
+        <tr>
+        <td>
+        <h2>People</h2>
+        <ul id="people">
+            <li><a href="http://www.eecs.berkeley.edu/~tinghuiz/">Tinghui Zhou</a>
+            </li>
+            <li><a href="http://www.cs.ucdavis.edu/~yjlee/">Yong Jae Lee</a>
+            </li>
+            <li><a href="http://www1.icsi.berkeley.edu/~stellayu/">Stella X. Yu</a>
+            </li>
+            <li><a href="http://www.eecs.berkeley.edu/~efros/">Alexei A. Efros</a>
+            </li></ul>
+        
+        
+        
+        <h2>Abstract</h2>
+        
+        <p>Given a set of poorly aligned images of the same visual concept without any annotations, we propose an algorithm to jointly bring them into pixel-wise correspondence by estimating a FlowWeb representation of the image set. FlowWeb is a fully-connected correspondence flow graph with each node representing an image, and each edge representing the correspondence flow field between a pair of images, i.e. a vector field indicating how each pixel in one image can find a corresponding pixel in the other image. Correspondence flow is related to optical flow but allows for correspondences between visually dissimilar regions if there is evidence they correspond transitively on the graph. Our algorithm starts by initializing all edges of this complete graph with an off-the-shelf, pairwise flow method. We then iteratively update the graph to force it to be more self-consistent. Once the algorithm converges, dense, globally-consistent correspondences can be read off the graph. Our results suggest that FlowWeb improves alignment accuracy over previous pairwise as well as joint alignment methods.</p>
+        <br>
+        </td>
+            </tr>
+        </table>
+        
+        <a href="http://www.eecs.berkeley.edu/~tinghuiz/papers/cvpr15_flow.pdf"><img style="float: left; padding: 10px; PADDING-RIGHT: 30px;" alt="paper thumbnail" src="images/paper_thumbnail.png"></a>
+        
+        
+        
+        <h3>Paper</h3>
+        CVPR <a href="http://www.eecs.berkeley.edu/~tinghuiz/papers/cvpr15_flow.pdf">paper</a>. (pdf, 9.3MB)<br>
+        </p>
+        
+        <h3>Presentation</h3>
+        <a href="http://www.eecs.berkeley.edu/~tinghuiz/slides/FlowWeb.pptx">pptx, 13.7MB</a><br>
+        
+<!--        <h3>Citation</h3>-->
+<!--        <p>Tinghui Zhou, Yong Jae Lee, Stella X. Yu, Alexei A. Efros. <b>FlowWeb: Joint Image Set Alignment by Weaving Consistent, Pixel-wise Correspondences.</b>-->
+<!--        <br>-->
+<!--        In <i>CVPR 2015</i>.-->
+<!--        </p>-->
+
+        <h3>Code & Data</h3>
+        Matlab implementation on <a href="https://github.com/tinghuiz/flowweb">Github</a>. <br>
+        PASCAL VOC <a href="http://www.eecs.berkeley.edu/~tinghuiz/data/pascal_data.tar.gz">data</a> used in the paper.<br>
+        Our alignment <a href="http://www.eecs.berkeley.edu/~tinghuiz/data/pascal_results.tar.gz">results</a> (2GB) on the PASCAL VOC data.
+        <br>
+        <br>
+        <br>
+        <br>
+        
+
+        <h2>Acknowledgement</h2>
+        We thank Philipp Kr&auml;henb&uuml;hl and Jun-Yan Zhu for insightful discussions. This work is partially sponsored by ONR MURI N000141010934. The authors are also grateful to the young Jessica for not being in a hurry.
+  
+</body></html>
