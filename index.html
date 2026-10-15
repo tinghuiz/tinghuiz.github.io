@@ -1,295 +1,503 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tinghui Zhou</title>
+  <meta name="description" content="Tinghui Zhou — Director, Foundation AI at Roblox. 3D foundation models, video world models, and agentic game generation.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #fbfaf6;
+      --ink: #1c1c1a;
+      --muted: #6d6a63;
+      --rule: #e4e0d6;
+      --link: #1f4fc4;
+      --mark: #d9822b;
+      --band: #f6efdd;
+      --thumb-bg: #ffffff;
+      --serif: Newsreader, "Iowan Old Style", Georgia, serif;
+      --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+      color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --paper: #141413;
+        --ink: #e8e6e0;
+        --muted: #9a968d;
+        --rule: #2b2a27;
+        --link: #8db0ff;
+        --mark: #e9a25a;
+        --band: #1f1b13;
+        --thumb-bg: #f4f3ef;
+        color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    body {
+      margin: 0; background: var(--paper); color: var(--ink);
+      font: 17px/1.55 var(--serif);
+      font-optical-sizing: auto;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--link); text-decoration: none; }
+    a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    .page { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+    .mono { font-family: var(--mono); font-size: 12px; letter-spacing: .02em; }
 
-<html>
-    <head>
-        <title>Tinghui Zhou's Homepage </title>
+    /* ---------- Header ---------- */
+    header {
+      display: grid; grid-template-columns: 1fr 188px; gap: 44px;
+      padding: 72px 0 36px; align-items: start;
+    }
+    h1 {
+      font-weight: 500; font-size: clamp(40px, 7vw, 56px); line-height: 1;
+      letter-spacing: -0.02em; margin: 0 0 14px;
+    }
+    .role { color: var(--muted); text-transform: uppercase; margin: 0 0 26px; }
+    .role b { color: var(--ink); font-weight: 500; }
+    header p { margin: 0 0 14px; max-width: 62ch; }
+    .portrait {
+      width: 188px; aspect-ratio: 4/5; object-fit: cover; object-position: center 20%;
+      border-radius: 4px; display: block; margin-top: 8px;
+    }
+    .contact {
+      display: flex; flex-wrap: wrap; margin-top: 22px;
+      border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+    }
+    .contact > * { padding: 9px 16px 9px 0; margin-right: 16px; border-right: 1px solid var(--rule); }
+    .contact > *:last-child { border-right: 0; }
+    .contact span { color: var(--muted); }
+
+    /* ---------- Publications ---------- */
+    .pubs-head {
+      display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px;
+      margin-top: 56px; padding-bottom: 12px; border-bottom: 1px solid var(--ink);
+    }
+    .pubs-head .sub { color: var(--muted); }
+    h2 { font-weight: 500; font-size: 30px; margin: 0; letter-spacing: -0.01em; }
+
+    .year {
+      display: grid; grid-template-columns: 76px 1fr; gap: 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .year > .y {
+      position: sticky; top: 0; align-self: start;
+      padding: 22px 0 0; font-family: var(--mono); font-size: 13px; color: var(--muted);
+    }
+    .paper {
+      display: grid; grid-template-columns: 200px 1fr; gap: 24px;
+      padding: 20px 16px; margin: 6px 0; border-radius: 6px;
+    }
+    .paper.hl { background: var(--band); }
+    .thumb {
+      width: 200px; aspect-ratio: 4/3; border-radius: 3px; overflow: hidden;
+      background: var(--thumb-bg); align-self: start;
+    }
+    .thumb.dark { background: #000; }
+    .thumb img, .thumb video { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .thumb.fit img, .thumb.fit video { object-fit: contain; }
+    .paper h3 { font-size: 19px; font-weight: 600; line-height: 1.28; margin: 0 0 4px; }
+    .paper h3 a { color: var(--ink); }
+    .paper h3 a:hover { color: var(--link); }
+    .authors { font-size: 15.5px; color: var(--muted); line-height: 1.45; }
+    .authors b { color: var(--ink); font-weight: 600; }
+    .authors a { color: inherit; }
+    .authors a:hover { color: var(--link); }
+    .venue { margin-top: 6px; color: var(--ink); }
+    .venue .tag { color: var(--mark); }
+    .tldr { font-style: italic; font-size: 15.5px; margin: 6px 0 0; }
+    .links { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 2px 14px; }
+    .links a::before { content: "↗ "; color: var(--muted); }
+
+    footer { padding: 36px 0 56px; color: var(--muted); }
+
+    @media (max-width: 720px) {
+      body { font-size: 16.5px; }
+      header { grid-template-columns: 1fr; gap: 20px; padding-top: 40px; }
+      .portrait { width: 120px; order: -1; margin: 0; }
+      .contact { gap: 0 18px; }
+      .contact > * { border-right: 0; padding-right: 0; margin-right: 0; }
+      .contact span { flex-basis: 100%; }
+      .year { grid-template-columns: 1fr; }
+      .year > .y { position: static; padding: 18px 0 0; }
+      .paper { grid-template-columns: 1fr; gap: 12px; padding: 14px 12px; margin: 6px 0; }
+      .thumb { width: 100%; aspect-ratio: 16/9; }
+    }
+  </style>
 </head>
-    <body><table border=0 width=980px align=center><tr><td>
-    
-        <td valign="top">
-<!--            <img src="images/cmuscslogo.gif">
-                <img src="images/rilogo.png"> -->
-        <br>
-        <table style="font-size: 11pt;" border=0 width=100%>
-            <tr>
+<body>
+<div class="page">
 
-                <td>
-                    <font face="helvetica, ariel, 'sans serif'" size="6"> 
-                        <b>Tinghui Zhou</b><br><br>
-                    </font>
-                    <font face="helvetica, ariel, 'sans serif'" size="4"> 
-                        Leading a 3D generative AI team at Roblox
-                        <br>
-                        Ex-founder of <a href="https://getsway.app">Sway</a> (acquired by Roblox)
-                        <br>
-                        Ph.D. from UC Berkeley, advised by <a href="http://www.cs.berkeley.edu/~efros/">Alexei A. Efros</a>
-                        <br><br>
-                        Email: tzhou [at] roblox [dot] com<br>
-                        <a href="https://scholar.google.com/citations?user=yA4rb60AAAAJ&hl=en&oi=ao">[Google Scholar]</a>
-                        <a href="https://github.com/tinghuiz">[Github]</a>
-                        <br>
+  <header>
+    <div>
+      <h1>Tinghui Zhou</h1>
+      <div class="role mono"><b>Director, Foundation AI</b> &nbsp;·&nbsp; Roblox</div>
+      <p>
+        I am a research lead at Roblox's Foundation AI group. Our research spans
+        3D foundation models, video world models, and agentic game generation.
+      </p>
+      <p>
+        Previously, I founded <a href="https://getsway.app">Sway</a>, an AI video generation startup (acquired by Roblox)
+        that somehow made it to #3 overall on the App Store — back before video models even “worked.”
+      </p>
+      <p>
+        I was fortunate to be advised by Prof. <a href="http://www.cs.berkeley.edu/~efros/">Alexei (Alyosha) Efros</a> during my Ph.D. at UC Berkeley.
+      </p>
+      <div class="contact mono">
+        <span>tzhou12 [at] gmail [dot] com</span>
+        <a href="https://scholar.google.com/citations?user=yA4rb60AAAAJ&hl=en">Scholar</a>
+        <a href="https://github.com/tinghuiz">GitHub</a>
+        <a href="https://www.linkedin.com/in/tinghui-zhou-3a622177">LinkedIn</a>
+        <a href="https://x.com/TinghuiZhou">X / Twitter</a>
+      </div>
+    </div>
+    <img class="portrait" src="images/mypic.png" alt="Tinghui Zhou">
+  </header>
 
-                    </font>
-                </td>
-                <td width = "50%">
-                    <img width=250 src="images/mypic.png" border="0">
-                        </td>
-            </tr>
-        </table> 
-        <p>
-        <hr size="1" align="left" noshade>
-        <p>
-        
-        <font face="helvetica, ariel, 'sans serif'"> 
-        <!-- <h2>About Me</h2>
-        I currently lead an engineering team at Roblox working on 3D generative AI. <br> Previously, I was the founder of an AI-powered human video synthesis startup <a href="https://getsway.app">Sway</a> (acquired by Roblox).
-        I received my Ph.D. from UC Berkeley, where I was advised by <a href="http://www.cs.berkeley.edu/~efros/">Alexei A. Efros</a>.  -->
-            
-        <!-- <h2>Pre-prints </h2> -->
-<!--         <font face="helvetica, ariel, 'sans serif'">
-            <table cellspacing="17">
-                <tr>
-                    <td width="45%">
-                        <img width=380 src="images/eccv16.png" border="0">
-                            </td>
-                    <td>
-                        <b>View Synthesis by Appearance Flow</b>
-                        <br>
-                        Tinghui Zhou,
-                        <a href="http://www.cs.berkeley.edu/~shubhtuls/">Shubham Tulsiani</a>,
-                        <a href="http://sunweilun.github.io/">Weilun Sun</a>,
-                        <a href="http://www.cs.berkeley.edu/~malik/">Jitendra Malik</a>,
-                        <a href="http://www.cs.berkeley.edu/~efros/">Alexei A. Efros</a>
-                        <br>
-                        arXiv, May 2016
-                        <br>
-                        <br>
-                        [<a href="http://arxiv.org/pdf/1605.03557v1.pdf">PDF</a>]
-                    </td>
-                </tr>
-            </table>
-        </font> -->
+  <main>
+    <div class="pubs-head">
+      <h2>Recent work</h2>
+      <span class="mono sub">Roblox Foundation AI</span>
+    </div>
 
-        <h2>Publications (not actively maintained...)</h2>
-        <font face="helvetica, ariel, 'sans serif'">
-            <table cellspacing="17">
+    <section class="year">
+      <div class="y">2026</div>
+      <div>
+        <article class="paper hl">
+          <div class="thumb dark"><video src="images/cubepart.mp4" poster="images/cubepart.jpg" muted loop playsinline preload="none"></video></div>
+          <div>
+            <h3><a href="https://cubepart.github.io/">CubePart: An Open-Vocabulary Part-Controllable 3D Generator</a></h3>
+            <div class="authors">Yiheng Zhu*, <a href="https://dunbar12138.github.io/">Kangle Deng</a>*, Jean-Philippe Fauconnier*, Inaki Navarro*, Daiqing Li, <a href="https://avalovelace1.github.io/">Ava Pun</a>, Yinan Zhang, Peiye Zhuang, Xiaoxia Sun, <a href="https://graphics.stanford.edu/~maneesh/">Maneesh Agrawala</a>, Kiran Bhat, <b>Tinghui Zhou</b></div>
+            <div class="venue mono">SIGGRAPH 2026</div>
+            <p class="tldr">Generate a 3D object from text, decomposed into parts that follow a user-defined, open-vocabulary schema.</p>
+            <div class="links mono">
+              <a href="https://arxiv.org/abs/2605.28763">paper</a>
+              <a href="https://cubepart.github.io/">project</a>
+              <a href="https://github.com/Roblox/cube/tree/main/cubepart">code</a>
+              <a href="https://huggingface.co/spaces/Roblox/cubepart-demo">demo</a>
+              <a href="https://about.roblox.com/newsroom/2026/05/cubepart-roblox-open-vocabulary-part-controllable-3d-generator">blog</a>
+            </div>
+          </div>
+        </article>
 
-                <tr>
-                    <td width="45%">
-                        <img width=320 src="images/dance.gif" border="0">
-                            </td>
-                    <td>
-                        <b>Everybody Dance Now </b>
-                        <br>
-                        <a href="https://people.csail.mit.edu/cmchan/"> Caroline Chan </a>, <a href="https://people.eecs.berkeley.edu/~shiry/"> Shiry Ginosar</a>, Tinghui Zhou <a href="http://www.cs.berkeley.edu/~efros/">Alexei A. Efros</a>
-                        <br>
-                        In <em>ICCV 2019 </em>
-                        <br>
-                        [<a href="https://arxiv.org/abs/1808.07371">Paper</a>][<a href="https://carolineec.github.io/everybody_dance_now/">Website</a>][<a href="https://www.youtube.com/watch?v=PCBTZh41Ris">Video</a>]
-                    </td>
-                </tr>
-                
+        <article class="paper">
+          <div class="thumb fit"><img src="images/multicube.jpg" alt="" loading="lazy"></div>
+          <div>
+            <h3><a href="https://multi-cube.github.io/">MultiCube: Compositional 3D Generation With Part-Level Semantic and Spatial Control</a></h3>
+            <div class="authors"><a href="https://avalovelace1.github.io/">Ava Pun</a>, <a href="https://dunbar12138.github.io/">Kangle Deng</a>, Yiheng Zhu, <a href="https://www.cs.cmu.edu/~junyanz/">Jun-Yan Zhu</a>, <a href="https://graphics.stanford.edu/~maneesh/">Maneesh Agrawala</a>, <b>Tinghui Zhou</b></div>
+            <div class="venue mono">arXiv 2026</div>
+            <div class="links mono">
+              <a href="https://arxiv.org/abs/2608.20448">paper</a>
+              <a href="https://multi-cube.github.io/">project</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
 
-                <tr>
-                    <td width="45%">
-                        <img width=320 src="images/siggraph19.png" border="0">
-                            </td>
-                    <td>
-                        <b>Multi-view Relighting Using a Geometry-Aware Network </b>
-                        <br>
-                        <a href="https://www-sop.inria.fr/members/Julien.Philip/"> Julien Philip </a>, <a href="https://research.adobe.com/person/michael-gharbi/"> Michael Gharbi</a>, Tinghui Zhou <a href="http://www.cs.berkeley.edu/~efros/">Alexei A. Efros</a> <a href="https://www-sop.inria.fr/members/George.Drettakis/">George Drettakis</a>
-                        <br>
-                        In <em>SIGGRAPH 2019 </em>
-                        <br>
-                        [<a href="https://repo-sam.inria.fr/fungraph/deep-relighting/Multi-view-Relighting.pdf">Paper</a>][<a href="https://repo-sam.inria.fr/fungraph/deep-relighting/">Website</a>][<a href="https://www.youtube.com/watch?v=C_V8UpZYAQU&feature=emb_logo">Video</a>]
-                    </td>
-                </tr>
+    <section class="year">
+      <div class="y">2025</div>
+      <div>
+        <article class="paper hl">
+          <div class="thumb dark"><video src="images/cube.mp4" poster="images/cube.jpg" muted loop playsinline preload="none"></video></div>
+          <div>
+            <h3><a href="https://arxiv.org/abs/2503.15475">Cube: A Roblox View of 3D Intelligence</a></h3>
+            <div class="authors">Foundation AI Team, Roblox &nbsp;·&nbsp; <b>Tinghui Zhou</b> (modeling lead)</div>
+            <div class="venue mono">Technical Report 2025</div>
+            <p class="tldr">Our roadmap toward a foundation model for 3D intelligence.</p>
+            <div class="links mono">
+              <a href="https://arxiv.org/abs/2503.15475">paper</a>
+              <a href="https://github.com/Roblox/cube">code</a>
+            </div>
+          </div>
+        </article>
 
-                <tr>
-                    <td width="45%">
-                        <img width=320 src="images/iclr2020.png" border="0">
-                            </td>
-                    <td>
-                        <b>Rethinking the Value of Network Pruning </b>
-                        <br>
-                        <a href="https://liuzhuang13.github.io/"> Zhuang Liu </a>, <a href="https://eric-mingjie.github.io//"> Mingjie Sun</a>, Tinghui Zhou <a href="http://www.gaohuang.net/">Gao Huang</a> <a href="https://people.eecs.berkeley.edu/~trevor/">Trevor Darrell</a>
-                        <br>
-                        In <em>ICLR 2019 </em> and <em>NeurIPS 2018</em> Workshop on Compact Deep Neural Networks <b>(Best Paper Award)</b>
-                        <br>
-                        [<a href="https://arxiv.org/abs/1810.05270">Paper</a>][<a href="https://github.com/Eric-mingjie/rethinking-network-pruning">Github</a>]
-                    </td>
-                </tr>
-                <tr>
-                    <td width="45%">
-                        <img width=320 src="images/mpi_teaser_small.png" border="0">
-                            </td>
-                    <td>
-                        <b>Stereo Magnification: Learning View Synthesis using Multiplane Images </b>
-                        <br>
-                        Tinghui Zhou, Richard Tucker, John Flynn, Graham Fyffe, <a href="http://www.cs.cornell.edu/~snavely/"> Noah Snavely</a>
-                        <br>
-                        In <em>SIGGRAPH 2018 </em>
-                        <br>
-                        [<a href="https://people.eecs.berkeley.edu/~tinghuiz/papers/siggraph18_mpi_lowres.pdf">Paper</a>][<a href="https://people.eecs.berkeley.edu/~tinghuiz/projects/mpi/">Website</a>][<a href="https://github.com/google/stereo-magnification">Github</a>]
-                    </td>
-                </tr>
-                <tr>
-                    <td width="45%">
-                        <img width=320 src="images/cvpr17sfm_teaser.png" border="0">
-                            </td>
-                    <td>
-                        <b>Unsupervised Learning of Depth and Ego-motion from Video </b>
-                        <br>
-                        Tinghui Zhou,
-                        <a href="http://matthewalunbrown.com/research/research.html">Matthew Brown</a>, <a href="http://www.cs.cornell.edu/~snavely/"> Noah Snavely</a>, <a href="http://www.cs.ubc.ca/~lowe/home.html"> David Lowe </a>
-                        <br>
-                        In <em>CVPR 2017 </em> (<b>Oral</b>)
-                        <br>
-                        [<a href="https://people.eecs.berkeley.edu/~tinghuiz/projects/SfMLearner/cvpr17_sfm_final.pdf">Paper</a>][<a href="https://people.eecs.berkeley.edu/~tinghuiz/projects/SfMLearner/">Website</a>][<a href="https://github.com/tinghuiz/SfMLearner">Github</a>]
-                    </td>
-                </tr>
-                <tr>
-                    <td width="45%">
-                        <img width=320 src="images/cvpr17drc_teaser.png" border="0">
-                            </td>
-                    <td>
-                        <b>Multi-view Supervision for Single-view Reconstruction via Differentiable Ray Consistency </b>
-                        <br>
-                        <a href="http://www.cs.berkeley.edu/~shubhtuls/">Shubham Tulsiani</a>, Tinghui Zhou,
-                        <a href="http://www.cs.berkeley.edu/~efros/">Alexei A. Efros</a>, <a href="http://www.cs.berkeley.edu/~malik/"> Jitendra Malik</a>
-                        <br>
-                        In <em>CVPR 2017 </em> (<b>Oral</b>)
-                        <br>
-                        [<a href="https://arxiv.org/pdf/1704.06254.pdf">Paper</a>][<a href="https://shubhtuls.github.io/drc/">Website</a>][<a href="https://github.com/shubhtuls/drc">Github</a>]
-                    </td>
-                </tr>
-                <tr>
-                    <td width="45%">
-                        <img width=320 src="images/pix2pix_teaser.jpg" border="0">
-                            </td>
-                    <td>
-                        <b>Image-to-Image Translation with Conditional Adversarial Nets</b>
-                        <br>
-                        <a href="http://web.mit.edu/phillipi/">Phillip Isola</a>, <a href="https://people.eecs.berkeley.edu/~junyanz/">Jun-Yan Zhu</a>, Tinghui Zhou, <a href="http://www.cs.berkeley.edu/~efros/">Alexei A. Efros</a>
-                        <br>
-                        In <em>CVPR 2017 </em>
-                        <br>
-                        [<a href="https://arxiv.org/pdf/1611.07004v1.pdf">Paper</a>][<a href="https://phillipi.github.io/pix2pix/">Website</a>][<a href="https://github.com/phillipi/pix2pix">Github</a>]
-                    </td>
-                </tr>
-                <tr>
-                    <td width="45%">
-                        <img width=320 src="images/eccv16.png" border="0">
-                            </td>
-                    <td>
-                        <b>View Synthesis by Appearance Flow</b>
-                        <br>
-                        Tinghui Zhou,
-                        <a href="http://www.cs.berkeley.edu/~shubhtuls/">Shubham Tulsiani</a>,
-                        <a href="http://sunweilun.github.io/">Weilun Sun</a>,
-                        <a href="http://www.cs.berkeley.edu/~malik/">Jitendra Malik</a>,
-                        <a href="http://www.cs.berkeley.edu/~efros/">Alexei A. Efros</a>
-                        <br>
-                        In <em>ECCV 2016 </em>
-                        <br>
-                        <br>
-                        [<a href="papers/eccv16_appflow.pdf">PDF</a>][<a href="http://arxiv.org/abs/1605.03557">arXiv][<a href="https://github.com/tinghuiz/appearance-flow">Github</a>]
-                    </td>
-                </tr>
-                <tr>
-                    <td width="45%">
-                        <img width=320 src="images/cvpr16.png" border="0">
-                            </td>
-                    <td>
-                        <b>Learning Dense Correspondence via 3D-guided Cycle Consistency</b>
-                        <br>
-                        Tinghui Zhou,
-                        <a href="http://www.philkr.net/">Philipp Kr&auml;henb&uuml;hl</a>,
-                        <a href="http://imagine.enpc.fr/~aubrym/index.html">Mathieu Aubry</a>,
-                        <a href="http://ttic.uchicago.edu/~huangqx/">Qixing Huang</a>,
-                        <a href="http://www.cs.berkeley.edu/~efros/">Alexei A. Efros</a>
-                        <br>
-                        In <em>CVPR 2016 </em> (<b>Oral</b>)
-                        <br>
-                        <br>
-                        [<a href="papers/cvpr16_cycle.pdf">PDF</a>][<a href="http://www.eecs.berkeley.edu/~tinghuiz/projects/learnCycle/">Project Page</a>]
-                    </td>
-                </tr>
+        <article class="paper hl">
+          <div class="thumb fit"><img src="images/oat.jpg" alt="" loading="lazy"></div>
+          <div>
+            <h3><a href="https://oat-3d.github.io/">Efficient Autoregressive Shape Generation via Octree-Based Adaptive Tokenization</a></h3>
+            <div class="authors"><a href="https://dunbar12138.github.io/">Kangle Deng</a>, <a href="https://www.dgp.toronto.edu/~hsuehtil/">Hsueh-Ti Derek Liu</a>, Yiheng Zhu, Xiaoxia Sun, Chong Shang, Kiran Bhat, <a href="https://www.cs.cmu.edu/~deva/">Deva Ramanan</a>, <a href="https://www.cs.cmu.edu/~junyanz/">Jun-Yan Zhu</a>, <a href="https://graphics.stanford.edu/~maneesh/">Maneesh Agrawala</a>, <b>Tinghui Zhou</b></div>
+            <div class="venue mono">ICCV 2025</div>
+            <p class="tldr">Adaptive octree tokens spend capacity where shapes are complex, making autoregressive 3D generation far more efficient.</p>
+            <div class="links mono">
+              <a href="http://arxiv.org/abs/2504.02817">paper</a>
+              <a href="https://oat-3d.github.io/">project</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
 
-				<tr>
-					<td width="45%">
-						<img width=320 src="images/iccv15.png" border="0">
-							</td>
-					<td>
-						<b>Learning Data-driven Reflectance Priors for Intrinsic Image Decomposition</b>
-						<br>
-						Tinghui Zhou,
-						<a href="http://www.philkr.net/">Philipp Kr&auml;henb&uuml;hl</a>,
-						<a href="http://www.cs.berkeley.edu/~efros/">Alexei A. Efros</a>
-						<br>
-						In <em>ICCV 2015</em>
-						<br>
-						<br>
-						[<a href="papers/iccv15_lrp.pdf">PDF</a>][<a href="http://www.eecs.berkeley.edu/~tinghuiz/projects/learnReflectance/">Project Page</a>]
-					</td>
-				</tr>
+    <section class="year">
+      <div class="y">2024</div>
+      <div>
+        <article class="paper hl">
+          <div class="thumb"><video src="images/flashtex.mp4" poster="images/flashtex.jpg" muted loop playsinline preload="none"></video></div>
+          <div>
+            <h3><a href="https://flashtex.github.io/">FlashTex: Fast Relightable Mesh Texturing with LightControlNet</a></h3>
+            <div class="authors"><a href="https://dunbar12138.github.io/">Kangle Deng</a>, Timothy Omernick, Alexander Weiss, <a href="https://www.cs.cmu.edu/~deva/">Deva Ramanan</a>, <a href="https://www.cs.cmu.edu/~junyanz/">Jun-Yan Zhu</a>, <b>Tinghui Zhou</b>, <a href="https://graphics.stanford.edu/~maneesh/">Maneesh Agrawala</a></div>
+            <div class="venue mono">ECCV 2024 <span class="tag">· Oral</span></div>
+            <p class="tldr">Text-to-texture for meshes in seconds, with materials that relight correctly in any environment.</p>
+            <div class="links mono">
+              <a href="https://arxiv.org/abs/2402.13251">paper</a>
+              <a href="https://flashtex.github.io/">project</a>
+              <a href="https://github.com/Roblox/FlashTex">code</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
 
-                <tr>
-                    <td width="45%">
-                        <img width=320 src="images/cvpr15_flow.png" border="0">
-                            </td>
-                    <td>
-                        <b>FlowWeb: Joint Image Set Alignment by Weaving Consistent, Pixel-wise Correspondences</b>
-                        <br>
-                        Tinghui Zhou,
-                        <a href="http://www.cs.ucdavis.edu/~yjlee/">Yong Jae Lee</a>,
-                        <a href="http://www1.icsi.berkeley.edu/~stellayu/">Stella X. Yu</a>,
-                        <a href="http://www.cs.berkeley.edu/~efros/">Alexei A. Efros</a>
-                        <br>
-                        In <em>CVPR 2015</em> (<b>Oral</b>)
-                        <br>
-                        <br>
-                        [<a href="papers/cvpr15_flow.pdf">PDF</a>][<a href="http://www.eecs.berkeley.edu/~tinghuiz/projects/flowWeb/">Project Page</a>]
-                    </td>
-                </tr>
-                <tr>
-                    <td width="45%">
-                        <img width=320 src="images/eccv12.png" border="0">
-                            </td>
-                    <td>
-                        <b>Undoing the Damage of Dataset Bias</b>
-                        <br>
-                        <a href="http://people.csail.mit.edu/khosla/">Aditya Khosla</a>,
-                        Tinghui Zhou,
-                        <a href="http://people.csail.mit.edu/tomasz/">Tomasz Malisiewicz</a>,
-                        <a href="http://www.cs.cmu.edu/~efros/">Alexei A. Efros</a>,
-                        <a href="http://web.mit.edu/torralba/www/">Antonio Torralba</a>
-                        <br>
-                        In <em>ECCV 2012</em>
-                        <br>
-                        <br>
-                        [<a href="papers/eccv2012.pdf">PDF</a>][<a href="http://undoingbias.csail.mit.edu/">Project Page</a>]
-                        <br>
-                    </td>
-                </tr>
-                <tr>
-                    <td width="45%">
-                        <img width=320 src="images/sdm12_kpmf.png" border="0">
-                            </td>
-                    <td>
-                        <b>Kernelized Probabilistic Matrix Factorization: Exploiting Graphs and Side Information</b>
-                        <br>
-                        Tinghui Zhou,
-                        <a href="http://www-users.cs.umn.edu/~shan/">Hanhuai Shan</a>,
-                        <a href="http://www.cs.umn.edu/~banerjee/">Arindam Banerjee</a>,
-                        <a href="http://www.ece.umn.edu/~guille/">Guillermo Sapiro</a>,
-                        <br>
-                        In <em> SDM 2012</em> (<b>Oral</b>)
-                        <br>
-                        <br>
-                        [<a href="papers/sdm12_kpmf.pdf">PDF</a>][<a href="code/kpmf.zip">Code</a>]
-                    </td>
-                </tr>
-            </table>
-        </font>
-            </body>
+    <div class="pubs-head">
+      <h2>Earlier publications</h2>
+      <span class="mono sub">Berkeley &amp; before</span>
+    </div>
+
+    <section class="year">
+      <div class="y">2020</div>
+      <div>
+        <article class="paper">
+          <div class="thumb"><video src="images/eccv20_city.mp4" poster="images/eccv20_city.jpg" muted loop playsinline preload="none"></video></div>
+          <div>
+            <h3><a href="https://factorize-a-city.github.io/">Learning to Factorize and Relight a City</a></h3>
+            <div class="authors">Andrew Liu, <a href="https://people.eecs.berkeley.edu/~shiry/">Shiry Ginosar</a>, <b>Tinghui Zhou</b>, <a href="http://www.cs.berkeley.edu/~efros/">Alexei A. Efros</a>, <a href="http://www.cs.cornell.edu/~snavely/">Noah Snavely</a></div>
+            <div class="venue mono">ECCV 2020</div>
+            <div class="links mono">
+              <a href="https://arxiv.org/abs/2008.02796">paper</a>
+              <a href="https://factorize-a-city.github.io/">project</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="year">
+      <div class="y">2019</div>
+      <div>
+        <article class="paper hl">
+          <div class="thumb"><img src="images/dance.gif" alt="" loading="lazy"></div>
+          <div>
+            <h3><a href="https://carolineec.github.io/everybody_dance_now/">Everybody Dance Now</a></h3>
+            <div class="authors"><a href="https://people.csail.mit.edu/cmchan/">Caroline Chan</a>, <a href="https://people.eecs.berkeley.edu/~shiry/">Shiry Ginosar</a>, <b>Tinghui Zhou</b>, <a href="http://www.cs.berkeley.edu/~efros/">Alexei A. Efros</a></div>
+            <div class="venue mono">ICCV 2019</div>
+            <p class="tldr">Transfer motion from a source dancer to anyone, via pose-guided video synthesis.</p>
+            <div class="links mono">
+              <a href="https://arxiv.org/abs/1808.07371">paper</a>
+              <a href="https://carolineec.github.io/everybody_dance_now/">project</a>
+              <a href="https://www.youtube.com/watch?v=PCBTZh41Ris">video</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="paper">
+          <div class="thumb"><img src="images/siggraph19.png" alt="" loading="lazy"></div>
+          <div>
+            <h3><a href="https://repo-sam.inria.fr/fungraph/deep-relighting/">Multi-view Relighting Using a Geometry-Aware Network</a></h3>
+            <div class="authors"><a href="https://www-sop.inria.fr/members/Julien.Philip/">Julien Philip</a>, <a href="https://research.adobe.com/person/michael-gharbi/">Michaël Gharbi</a>, <b>Tinghui Zhou</b>, <a href="http://www.cs.berkeley.edu/~efros/">Alexei A. Efros</a>, <a href="https://www-sop.inria.fr/members/George.Drettakis/">George Drettakis</a></div>
+            <div class="venue mono">SIGGRAPH 2019</div>
+            <div class="links mono">
+              <a href="https://repo-sam.inria.fr/fungraph/deep-relighting/Multi-view-Relighting.pdf">paper</a>
+              <a href="https://repo-sam.inria.fr/fungraph/deep-relighting/">project</a>
+              <a href="https://www.youtube.com/watch?v=C_V8UpZYAQU">video</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="paper">
+          <div class="thumb fit"><img src="images/iclr2020.png" alt="" loading="lazy"></div>
+          <div>
+            <h3><a href="https://arxiv.org/abs/1810.05270">Rethinking the Value of Network Pruning</a></h3>
+            <div class="authors"><a href="https://liuzhuang13.github.io/">Zhuang Liu</a>, <a href="https://eric-mingjie.github.io/">Mingjie Sun</a>, <b>Tinghui Zhou</b>, <a href="http://www.gaohuang.net/">Gao Huang</a>, <a href="https://people.eecs.berkeley.edu/~trevor/">Trevor Darrell</a></div>
+            <div class="venue mono">ICLR 2019 <span class="tag">· Best Paper, NeurIPS 2018 CDNNRIA Workshop</span></div>
+            <div class="links mono">
+              <a href="https://arxiv.org/abs/1810.05270">paper</a>
+              <a href="https://github.com/Eric-mingjie/rethinking-network-pruning">code</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="year">
+      <div class="y">2018</div>
+      <div>
+        <article class="paper hl">
+          <div class="thumb"><img src="images/mpi_teaser_small.png" alt="" loading="lazy"></div>
+          <div>
+            <h3><a href="projects/mpi/">Stereo Magnification: Learning View Synthesis using Multiplane Images</a></h3>
+            <div class="authors"><b>Tinghui Zhou</b>, Richard Tucker, John Flynn, Graham Fyffe, <a href="http://www.cs.cornell.edu/~snavely/">Noah Snavely</a></div>
+            <div class="venue mono">SIGGRAPH 2018</div>
+            <p class="tldr">Introduced multiplane images (MPIs), a layered scene representation for extrapolating novel views from a stereo pair.</p>
+            <div class="links mono">
+              <a href="papers/siggraph18_mpi_lowres.pdf">paper</a>
+              <a href="projects/mpi/">project</a>
+              <a href="https://github.com/google/stereo-magnification">code</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="year">
+      <div class="y">2017</div>
+      <div>
+        <article class="paper hl">
+          <div class="thumb"><img src="images/cvpr17sfm_teaser.png" alt="" loading="lazy"></div>
+          <div>
+            <h3><a href="https://people.eecs.berkeley.edu/~tinghuiz/projects/SfMLearner/">Unsupervised Learning of Depth and Ego-Motion from Video</a></h3>
+            <div class="authors"><b>Tinghui Zhou</b>, <a href="http://matthewalunbrown.com/research/research.html">Matthew Brown</a>, <a href="http://www.cs.cornell.edu/~snavely/">Noah Snavely</a>, <a href="http://www.cs.ubc.ca/~lowe/home.html">David Lowe</a></div>
+            <div class="venue mono">CVPR 2017 <span class="tag">· Oral</span></div>
+            <p class="tldr">Learn single-view depth and camera motion from unlabeled video, using view synthesis as the only supervision.</p>
+            <div class="links mono">
+              <a href="https://people.eecs.berkeley.edu/~tinghuiz/projects/SfMLearner/cvpr17_sfm_final.pdf">paper</a>
+              <a href="https://people.eecs.berkeley.edu/~tinghuiz/projects/SfMLearner/">project</a>
+              <a href="https://github.com/tinghuiz/SfMLearner">code</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="paper">
+          <div class="thumb"><img src="images/cvpr17drc_teaser.png" alt="" loading="lazy"></div>
+          <div>
+            <h3><a href="https://shubhtuls.github.io/drc/">Multi-view Supervision for Single-view Reconstruction via Differentiable Ray Consistency</a></h3>
+            <div class="authors"><a href="http://www.cs.berkeley.edu/~shubhtuls/">Shubham Tulsiani</a>, <b>Tinghui Zhou</b>, <a href="http://www.cs.berkeley.edu/~efros/">Alexei A. Efros</a>, <a href="http://www.cs.berkeley.edu/~malik/">Jitendra Malik</a></div>
+            <div class="venue mono">CVPR 2017 <span class="tag">· Oral</span></div>
+            <div class="links mono">
+              <a href="https://arxiv.org/pdf/1704.06254.pdf">paper</a>
+              <a href="https://shubhtuls.github.io/drc/">project</a>
+              <a href="https://github.com/shubhtuls/drc">code</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="paper hl">
+          <div class="thumb"><img src="images/pix2pix_teaser.jpg" alt="" loading="lazy"></div>
+          <div>
+            <h3><a href="https://phillipi.github.io/pix2pix/">Image-to-Image Translation with Conditional Adversarial Networks</a></h3>
+            <div class="authors"><a href="http://web.mit.edu/phillipi/">Phillip Isola</a>, <a href="https://people.eecs.berkeley.edu/~junyanz/">Jun-Yan Zhu</a>, <b>Tinghui Zhou</b>, <a href="http://www.cs.berkeley.edu/~efros/">Alexei A. Efros</a></div>
+            <div class="venue mono">CVPR 2017</div>
+            <p class="tldr">pix2pix: one conditional GAN recipe for many image-to-image translation tasks.</p>
+            <div class="links mono">
+              <a href="https://arxiv.org/pdf/1611.07004v1.pdf">paper</a>
+              <a href="https://phillipi.github.io/pix2pix/">project</a>
+              <a href="https://github.com/phillipi/pix2pix">code</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="year">
+      <div class="y">2016</div>
+      <div>
+        <article class="paper">
+          <div class="thumb"><img src="images/eccv16.png" alt="" loading="lazy"></div>
+          <div>
+            <h3><a href="http://arxiv.org/abs/1605.03557">View Synthesis by Appearance Flow</a></h3>
+            <div class="authors"><b>Tinghui Zhou</b>, <a href="http://www.cs.berkeley.edu/~shubhtuls/">Shubham Tulsiani</a>, <a href="http://sunweilun.github.io/">Weilun Sun</a>, <a href="http://www.cs.berkeley.edu/~malik/">Jitendra Malik</a>, <a href="http://www.cs.berkeley.edu/~efros/">Alexei A. Efros</a></div>
+            <div class="venue mono">ECCV 2016</div>
+            <div class="links mono">
+              <a href="papers/eccv16_appflow.pdf">pdf</a>
+              <a href="http://arxiv.org/abs/1605.03557">arXiv</a>
+              <a href="https://github.com/tinghuiz/appearance-flow">code</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="paper">
+          <div class="thumb"><img src="images/cvpr16.png" alt="" loading="lazy"></div>
+          <div>
+            <h3><a href="projects/learnCycle/">Learning Dense Correspondence via 3D-guided Cycle Consistency</a></h3>
+            <div class="authors"><b>Tinghui Zhou</b>, <a href="http://www.philkr.net/">Philipp Kr&auml;henb&uuml;hl</a>, <a href="http://imagine.enpc.fr/~aubrym/index.html">Mathieu Aubry</a>, <a href="http://ttic.uchicago.edu/~huangqx/">Qixing Huang</a>, <a href="http://www.cs.berkeley.edu/~efros/">Alexei A. Efros</a></div>
+            <div class="venue mono">CVPR 2016 <span class="tag">· Oral</span></div>
+            <div class="links mono">
+              <a href="papers/cvpr16_cycle.pdf">pdf</a>
+              <a href="projects/learnCycle/">project</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="year">
+      <div class="y">2015</div>
+      <div>
+        <article class="paper">
+          <div class="thumb"><img src="images/iccv15.png" alt="" loading="lazy"></div>
+          <div>
+            <h3><a href="projects/learnReflectance/">Learning Data-driven Reflectance Priors for Intrinsic Image Decomposition</a></h3>
+            <div class="authors"><b>Tinghui Zhou</b>, <a href="http://www.philkr.net/">Philipp Kr&auml;henb&uuml;hl</a>, <a href="http://www.cs.berkeley.edu/~efros/">Alexei A. Efros</a></div>
+            <div class="venue mono">ICCV 2015</div>
+            <div class="links mono">
+              <a href="papers/iccv15_lrp.pdf">pdf</a>
+              <a href="projects/learnReflectance/">project</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="paper">
+          <div class="thumb"><img src="images/cvpr15_flow.png" alt="" loading="lazy"></div>
+          <div>
+            <h3><a href="projects/flowWeb/">FlowWeb: Joint Image Set Alignment by Weaving Consistent, Pixel-wise Correspondences</a></h3>
+            <div class="authors"><b>Tinghui Zhou</b>, <a href="http://www.cs.ucdavis.edu/~yjlee/">Yong Jae Lee</a>, <a href="http://www1.icsi.berkeley.edu/~stellayu/">Stella X. Yu</a>, <a href="http://www.cs.berkeley.edu/~efros/">Alexei A. Efros</a></div>
+            <div class="venue mono">CVPR 2015 <span class="tag">· Oral</span></div>
+            <div class="links mono">
+              <a href="papers/cvpr15_flow.pdf">pdf</a>
+              <a href="projects/flowWeb/">project</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="year">
+      <div class="y">2012</div>
+      <div>
+        <article class="paper">
+          <div class="thumb"><img src="images/eccv12.png" alt="" loading="lazy"></div>
+          <div>
+            <h3><a href="http://undoingbias.csail.mit.edu/">Undoing the Damage of Dataset Bias</a></h3>
+            <div class="authors"><a href="http://people.csail.mit.edu/khosla/">Aditya Khosla</a>, <b>Tinghui Zhou</b>, <a href="http://people.csail.mit.edu/tomasz/">Tomasz Malisiewicz</a>, <a href="http://www.cs.cmu.edu/~efros/">Alexei A. Efros</a>, <a href="http://web.mit.edu/torralba/www/">Antonio Torralba</a></div>
+            <div class="venue mono">ECCV 2012</div>
+            <div class="links mono">
+              <a href="papers/eccv2012.pdf">pdf</a>
+              <a href="http://undoingbias.csail.mit.edu/">project</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="paper">
+          <div class="thumb fit"><img src="images/sdm12_kpmf.png" alt="" loading="lazy"></div>
+          <div>
+            <h3><a href="papers/sdm12_kpmf.pdf">Kernelized Probabilistic Matrix Factorization: Exploiting Graphs and Side Information</a></h3>
+            <div class="authors"><b>Tinghui Zhou</b>, <a href="http://www-users.cs.umn.edu/~shan/">Hanhuai Shan</a>, <a href="http://www.cs.umn.edu/~banerjee/">Arindam Banerjee</a>, <a href="http://www.ece.umn.edu/~guille/">Guillermo Sapiro</a></div>
+            <div class="venue mono">SDM 2012 <span class="tag">· Oral</span></div>
+            <div class="links mono">
+              <a href="papers/sdm12_kpmf.pdf">pdf</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="mono">Last updated October 2026</footer>
+</div>
+
+<script>
+  // Play teaser videos only while they are on screen
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entries => entries.forEach(e => {
+      if (e.isIntersecting) e.target.play().catch(() => {}); else e.target.pause();
+    }), { threshold: 0.25 });
+    document.querySelectorAll('.thumb video').forEach(v => io.observe(v));
+  }
+</script>
+</body>
 </html>
